@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asesoría Roberts — Conferencias Dirigidas por Estudiantes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1B365D;
+    --gold: #D4A843;
+    --cream: #f8f6f1;
+    --body-text: #2a2a2a;
+    --outer-bg: #f4f4f0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--outer-bg);
+    color: var(--body-text);
+  }
+
+  section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -10%;
+    width: 120%;
+    height: 160px;
+    background: var(--gold);
+    opacity: 0.12;
+    border-radius: 50%;
+  }
+
+  .hero-logo {
+    width: 320px;
+    margin-bottom: 40px;
+    opacity: 0.95;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+  }
+
+  .hero .subtitle {
+    font-size: 1.4rem;
+    font-weight: 400;
+    opacity: 0.75;
+    margin-top: 8px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ── AGENDA ── */
+  .agenda {
+    background: var(--cream);
+  }
+
+  .agenda h2 {
+    font-size: 2.4rem;
+    color: var(--navy);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .agenda-steps {
+    display: flex;
+    gap: 32px;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .step {
+    flex: 1;
+    background: white;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27, 54, 93, 0.08);
+    border-top: 5px solid var(--gold);
+    transition: transform 0.2s;
+  }
+
+  .step:hover {
+    transform: translateY(-4px);
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .step-time {
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .step-title {
+    font-size: 1.5rem;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* ── QUESTION CARDS ── */
+  .question-section {
+    background: var(--navy);
+    color: white;
+    position: relative;
+  }
+
+  .question-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gold);
+  }
+
+  .q-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  .q-text {
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 1.3;
+    max-width: 960px;
+    text-align: center;
+  }
+
+  .q-note {
+    margin-top: 32px;
+    font-size: 1.1rem;
+    opacity: 0.55;
+    font-style: italic;
+  }
+
+  /* ── ALT QUESTION (cream bg) ── */
+  .question-section.alt {
+    background: var(--cream);
+    color: var(--navy);
+  }
+
+  .question-section.alt::after {
+    background: var(--navy);
+  }
+
+  .question-section.alt .q-label {
+    color: var(--gold);
+  }
+
+  .question-section.alt .q-text {
+    color: var(--navy);
+  }
+
+  .question-section.alt .q-note {
+    color: #666;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+  }
+
+  .closing h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .closing h2 span {
+    color: var(--gold);
+  }
+
+  .closing p {
+    font-size: 1.3rem;
+    opacity: 0.7;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  /* ── NAV DOTS ── */
+  .nav-dots {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 100;
+  }
+
+  .nav-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(212, 168, 67, 0.3);
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav-dot.active {
+    background: var(--gold);
+    transform: scale(1.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav dots -->
+<div class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-target="hero"></div>
+  <div class="nav-dot" data-target="agenda"></div>
+  <div class="nav-dot" data-target="q1"></div>
+  <div class="nav-dot" data-target="q2"></div>
+  <div class="nav-dot" data-target="q3"></div>
+  <div class="nav-dot" data-target="q4"></div>
+  <div class="nav-dot" data-target="closing"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <img src="https://images.squarespace-cdn.com/content/v1/66bdf98b52ccc74745188be4/abe54924-3984-4802-8daa-db16d8bd287c/Foundation_Academies_Primary_Horizontal-White.png"
+       alt="Foundation Academies" class="hero-logo">
+  <h1>Asesoría Roberts<br><span>Conferencias Dirigidas por Estudiantes</span></h1>
+  <p class="subtitle">Tus calificaciones. Tus palabras. Tu plan.</p>
+  <div class="scroll-hint">desplaza para comenzar ↓</div>
+</section>
+
+<!-- AGENDA -->
+<section class="agenda" id="agenda">
+  <h2>Agenda de Hoy</h2>
+  <div class="agenda-steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-time">2 Minutos</div>
+      <div class="step-title">Revisión en Silencio</div>
+      <div class="step-desc">Mira tu boleta de calificaciones. Encuentra tu nota más alta, tu nota más baja, y la que más te sorprendió.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-time">15 Minutos</div>
+      <div class="step-title">Preguntas de Reflexión</div>
+      <div class="step-desc">Responde cada pregunta con honestidad y en voz alta. Nada de respuestas de una sola palabra. Cuenta la historia.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-time">5 Minutos</div>
+      <div class="step-title">Próximos Pasos</div>
+      <div class="step-desc">Preguntas para el Sr. Roberts. Nombra una cosa específica que harás diferente antes de la próxima boleta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PREGUNTA 1 -->
+<section class="question-section" id="q1">
+  <div class="q-label">Pregunta 1</div>
+  <div class="q-text">Escoge la calificación que más te sorprendió — no la peor, sino la que no refleja cuánto te esforzaste.<br><br>¿Por qué hay una diferencia?</div>
+  <div class="q-note">Mira tu boleta. Señálala.</div>
+</section>
+
+<!-- PREGUNTA 2 -->
+<section class="question-section alt" id="q2">
+  <div class="q-label">Pregunta 2</div>
+  <div class="q-text">Si yo llamara al maestro de tu nota más baja ahora mismo y le pidiera que te describiera como estudiante en una oración — ¿qué diría?<br><br>¿Esa persona eres tú realmente?</div>
+  <div class="q-note">Sé honesto/a. No lo que esperas que digan — lo que realmente dirían.</div>
+</section>
+
+<!-- PREGUNTA 3 -->
+<section class="question-section" id="q3">
+  <div class="q-label">Pregunta 3</div>
+  <div class="q-text">Mira tu nota más alta. ¿Qué hiciste diferente en esa clase?<br><br>Y si tu respuesta es "es fácil" — ¿por qué no tienes una A en todas las clases donde entiendes el material?</div>
+  <div class="q-note">Fácil y sobresaliente no son lo mismo.</div>
+</section>
+
+<!-- PREGUNTA 4 -->
+<section class="question-section alt" id="q4">
+  <div class="q-label">Pregunta 4</div>
+  <div class="q-text">¿Qué es lo que no quieres tener que explicarle a alguien que respetas en esta boleta?<br><br>¿Qué vas a hacer al respecto antes de la próxima?</div>
+  <div class="q-note">Nombra a la persona. Nombra el plan.</div>
+</section>
+
+<!-- CIERRE -->
+<section class="closing" id="closing">
+  <h2>Tus calificaciones cuentan una historia.<br><span>Asegúrate de que sea la tuya.</span></h2>
+  <p>La próxima boleta es una página en blanco. Lo que hagas entre ahora y entonces es lo único que importa.</p>
+</section>
+
+<script>
+  // Nav dot active state on scroll
+  const sections = document.querySelectorAll('section');
+  const dots = document.querySelectorAll('.nav-dot');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const target = entry.target.id;
+        document.querySelector(`.nav-dot[data-target="${target}"]`).classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Click nav dots to scroll
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = dot.getAttribute('data-target');
+      document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roberts Advisory — Student-Led Conferences</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1B365D;
+    --gold: #D4A843;
+    --cream: #f8f6f1;
+    --body-text: #2a2a2a;
+    --outer-bg: #f4f4f0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--outer-bg);
+    color: var(--body-text);
+  }
+
+  section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -10%;
+    width: 120%;
+    height: 160px;
+    background: var(--gold);
+    opacity: 0.12;
+    border-radius: 50%;
+  }
+
+  .hero-logo {
+    width: 320px;
+    margin-bottom: 40px;
+    opacity: 0.95;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+  }
+
+  .hero .subtitle {
+    font-size: 1.4rem;
+    font-weight: 400;
+    opacity: 0.75;
+    margin-top: 8px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+
+  /* ── AGENDA ── */
+  .agenda {
+    background: var(--cream);
+  }
+
+  .agenda h2 {
+    font-size: 2.4rem;
+    color: var(--navy);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .agenda-steps {
+    display: flex;
+    gap: 32px;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .step {
+    flex: 1;
+    background: white;
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(27, 54, 93, 0.08);
+    border-top: 5px solid var(--gold);
+    transition: transform 0.2s;
+  }
+
+  .step:hover {
+    transform: translateY(-4px);
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .step-time {
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .step-title {
+    font-size: 1.5rem;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* ── QUESTION CARDS ── */
+  .question-section {
+    background: var(--navy);
+    color: white;
+    position: relative;
+  }
+
+  .question-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gold);
+  }
+
+  .q-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 32px;
+  }
+
+  .q-text {
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 1.3;
+    max-width: 960px;
+    text-align: center;
+  }
+
+  .q-note {
+    margin-top: 32px;
+    font-size: 1.1rem;
+    opacity: 0.55;
+    font-style: italic;
+  }
+
+  /* ── ALT QUESTION (cream bg) ── */
+  .question-section.alt {
+    background: var(--cream);
+    color: var(--navy);
+  }
+
+  .question-section.alt::after {
+    background: var(--navy);
+  }
+
+  .question-section.alt .q-label {
+    color: var(--gold);
+  }
+
+  .question-section.alt .q-text {
+    color: var(--navy);
+  }
+
+  .question-section.alt .q-note {
+    color: #666;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+  }
+
+  .closing h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .closing h2 span {
+    color: var(--gold);
+  }
+
+  .closing p {
+    font-size: 1.3rem;
+    opacity: 0.7;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  /* ── NAV DOTS ── */
+  .nav-dots {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 100;
+  }
+
+  .nav-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(212, 168, 67, 0.3);
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav-dot.active {
+    background: var(--gold);
+    transform: scale(1.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav dots -->
+<div class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-target="hero"></div>
+  <div class="nav-dot" data-target="agenda"></div>
+  <div class="nav-dot" data-target="q1"></div>
+  <div class="nav-dot" data-target="q2"></div>
+  <div class="nav-dot" data-target="q3"></div>
+  <div class="nav-dot" data-target="q4"></div>
+  <div class="nav-dot" data-target="closing"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <img src="https://images.squarespace-cdn.com/content/v1/66bdf98b52ccc74745188be4/abe54924-3984-4802-8daa-db16d8bd287c/Foundation_Academies_Primary_Horizontal-White.png"
+       alt="Foundation Academies" class="hero-logo">
+  <h1>Roberts Advisory<br><span>Student-Led Conferences</span></h1>
+  <p class="subtitle">Your grades. Your words. Your plan.</p>
+  <div class="scroll-hint">scroll to begin ↓</div>
+</section>
+
+<!-- AGENDA -->
+<section class="agenda" id="agenda">
+  <h2>Today's Agenda</h2>
+  <div class="agenda-steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-time">2 Minutes</div>
+      <div class="step-title">Silent Review</div>
+      <div class="step-desc">Look at your report card. Find your highest grade, your lowest grade, and the one that surprised you.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-time">15 Minutes</div>
+      <div class="step-title">Reflection Questions</div>
+      <div class="step-desc">Answer each question honestly and out loud. No one-word answers. Tell the story.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-time">5 Minutes</div>
+      <div class="step-title">Next Steps</div>
+      <div class="step-desc">Questions for Mr. Roberts. Name one specific thing you will do differently before the next report card.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTION 1 -->
+<section class="question-section" id="q1">
+  <div class="q-label">Question 1</div>
+  <div class="q-text">Pick the grade that surprised you the most — not the worst one, the one that doesn't match how hard you actually worked.<br><br>Why is there a gap?</div>
+  <div class="q-note">Look at your report card. Point to it.</div>
+</section>
+
+<!-- QUESTION 2 -->
+<section class="question-section alt" id="q2">
+  <div class="q-label">Question 2</div>
+  <div class="q-text">If I called the teacher of your lowest grade right now and asked them to describe you as a student in one sentence — what would they say?<br><br>Is that who you actually are?</div>
+  <div class="q-note">Be honest. Not what you hope they'd say — what they'd actually say.</div>
+</section>
+
+<!-- QUESTION 3 -->
+<section class="question-section" id="q3">
+  <div class="q-label">Question 3</div>
+  <div class="q-text">Look at your highest grade. What did you do differently in that class?<br><br>And if your answer is "it's easy" — why isn't every class where you understand the material an A?</div>
+  <div class="q-note">Easy and high-performing are not the same thing.</div>
+</section>
+
+<!-- QUESTION 4 -->
+<section class="question-section alt" id="q4">
+  <div class="q-label">Question 4</div>
+  <div class="q-text">What's one thing on this report card you don't want to explain to someone you respect?<br><br>What are you going to do about it before the next one?</div>
+  <div class="q-note">Name the person. Name the plan.</div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing" id="closing">
+  <h2>Your grades tell a story.<br><span>Make sure it's yours.</span></h2>
+  <p>The next report card is a blank page. What you do between now and then is the only thing that matters.</p>
+</section>
+
+<script>
+  // Nav dot active state on scroll
+  const sections = document.querySelectorAll('section');
+  const dots = document.querySelectorAll('.nav-dot');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const target = entry.target.id;
+        document.querySelector(`.nav-dot[data-target="${target}"]`).classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Click nav dots to scroll
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = dot.getAttribute('data-target');
+      document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
