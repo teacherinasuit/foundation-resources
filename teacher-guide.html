@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Literacy in 15 Minutes — Teacher Guide | Teacher in a Suit</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #2E5596;
+  --blue-dark: #1E3A6A;
+  --blue-light: #E8EEF6;
+  --blue-lighter: #F0F4F9;
+  --gold: #D5A44F;
+  --gold-light: #F5EBD7;
+  --gold-dark: #B8893A;
+  --red: #A62A2E;
+  --red-light: #F9E8E8;
+  --cream: #FAF8F5;
+  --cream-dark: #F0EDE8;
+  --ink: #1A1A2E;
+  --ink-light: #4A4A5A;
+  --ink-muted: #7A7A8A;
+  --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ COVER PAGE ═══════ */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--blue-dark);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 80vw;
+  height: 80vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(213,164,79,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gold);
+}
+
+.cover-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.cover-badge {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cover-badge::before,
+.cover-badge::after {
+  content: '';
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.cover h1 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  color: var(--white);
+  text-align: center;
+  line-height: 1.15;
+  max-width: 700px;
+  margin-bottom: 0.75rem;
+}
+
+.cover h1 em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.cover-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  max-width: 480px;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.cover-created-for {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.cover-created-for span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+.cover-created-for img {
+  height: 28px;
+  width: auto;
+  opacity: 0.55;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ═══════ STICKY NAV ═══════ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--cream-dark);
+  padding: 0 2rem;
+  overflow-x: auto;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+}
+
+.nav a {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+  padding: 1rem 1.2rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.nav a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ═══════ LAYOUT ═══════ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+section:last-of-type { border-bottom: none; }
+
+.section-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--blue-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--ink-light);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+  line-height: 1.65;
+}
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+
+/* ═══════ GRADE BAND CARDS ═══════ */
+.grade-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.grade-card-header {
+  padding: 1rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grade-card-header--k4 { background: var(--gold-dark); }
+.grade-card-header--58 { background: var(--blue); }
+.grade-card-header--912 { background: var(--blue-dark); }
+
+.grade-card-time {
+  font-weight: 500;
+  font-size: 0.68rem;
+  opacity: 0.8;
+}
+
+.grade-card-body {
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.grade-card-body h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+
+.grade-card-body p,
+.grade-card-body li {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.grade-card-body ol,
+.grade-card-body ul {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.grade-card-body li { margin-bottom: 0.4rem; }
+
+/* ═══════ CALLOUT BOXES ═══════ */
+.callout {
+  border-left: 3px solid var(--blue);
+  background: var(--blue-lighter);
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.55;
+  margin: 1rem 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.callout strong { color: var(--ink); }
+.callout--gold { border-left-color: var(--gold); background: var(--gold-light); }
+.callout--red { border-left-color: var(--red); background: var(--red-light); }
+
+/* ═══════ TALKING POINT ═══════ */
+.talking-point {
+  background: var(--cream);
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+
+.talking-point-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  font-style: normal;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* ═══════ TAKE-HOME ═══════ */
+.take-home {
+  background: var(--blue-dark);
+  color: var(--white);
+  padding: 1rem 1.25rem;
+  border-radius: 2px;
+  margin: 1rem 0;
+}
+
+.take-home-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.take-home p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ═══════ WHAT TO SKIP ═══════ */
+.skip-note {
+  background: var(--red-light);
+  border-left: 3px solid var(--red);
+  padding: 0.85rem 1.25rem;
+  font-size: 0.82rem;
+  color: var(--ink-light);
+  margin: 1rem 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.skip-note strong { color: var(--red); }
+
+/* ═══════ OVERVIEW SECTION ═══════ */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.overview-stat {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 2px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.overview-stat-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--blue-dark);
+  margin-bottom: 0.2rem;
+}
+
+.overview-stat-value--gold { color: var(--gold-dark); }
+
+.overview-stat-label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.overview-stat-desc {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+/* ═══════ RESOURCES ═══════ */
+.resource-list {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.resource-list li:hover { box-shadow: 0 2px 12px rgba(30,58,106,0.06); }
+
+.resource-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.resource-icon--blue { background: var(--blue-light); color: var(--blue); }
+.resource-icon--gold { background: var(--gold-light); color: var(--gold-dark); }
+.resource-icon--red { background: var(--red-light); color: var(--red); }
+
+.resource-info { flex: 1; }
+
+.resource-info strong {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  color: var(--ink);
+  display: block;
+}
+
+.resource-info span {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+}
+
+.resource-info a {
+  color: var(--blue);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.resource-info a:hover { text-decoration: underline; }
+
+/* ═══════ FOOTER ═══════ */
+.footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--cream);
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logos img { height: auto; opacity: 0.7; }
+.footer-logos .tias-footer { width: 60px; }
+.footer-logos .fa-footer { width: 140px; }
+
+.footer-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--cream-dark);
+}
+
+.footer p {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.footer strong {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 768px) {
+  .overview-grid { grid-template-columns: 1fr; }
+  .nav a { padding: 0.85rem 0.8rem; font-size: 0.65rem; }
+  .cover h1 { font-size: 1.8rem; }
+}
+
+/* ═══════ PRINT / PDF ═══════ */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.75in 0.6in;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body { background: white; }
+  .nav { display: none !important; }
+
+  .cover {
+    min-height: auto;
+    padding: 3.5rem 2rem;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  section {
+    padding: 2rem 0;
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .grade-card,
+  .callout,
+  .talking-point,
+  .take-home,
+  .skip-note,
+  .overview-stat,
+  .resource-list li {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  h2, h3, h4,
+  .section-number,
+  .section-lead,
+  .grade-card-header {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .container { padding: 0 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ COVER PAGE ═══════ -->
+<div class="cover">
+  <img src="logos/tias-white.png" alt="Teacher in a Suit" class="cover-logo">
+  <div class="cover-badge">Teacher in a Suit</div>
+  <h1>AI Literacy in 15 Minutes<br>Episode 1: <em>"Think Bigger"</em></h1>
+  <p class="cover-subtitle">Teacher Guide</p>
+  <div class="cover-created-for">
+    <span>Created for</span>
+    <img src="https://images.squarespace-cdn.com/content/v1/66bdf98b52ccc74745188be4/abe54924-3984-4802-8daa-db16d8bd287c/Foundation_Academies_Primary_Horizontal-White.png" alt="Foundation Academies">
+  </div>
+  <div class="cover-meta">
+    <span>National AI Literacy Day 2026</span>
+    <span>March 27, 2026</span>
+  </div>
+</div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">Overview</a>
+    <a href="#k4">K-4</a>
+    <a href="#58">5-8</a>
+    <a href="#912">9-12</a>
+    <a href="#teachers">For Teachers</a>
+    <a href="#resources">Resources</a>
+  </div>
+</nav>
+
+<!-- ═══════ OVERVIEW ═══════ -->
+<section id="overview">
+  <div class="container">
+    <span class="section-number">01</span>
+    <h2>What This Video Does</h2>
+    <p class="section-lead">Students watch Winston demonstrate what AI actually is, see a hands-on activity that shows how input quality drives output quality, and learn about a free tool they can use to learn anything.</p>
+
+    <div class="overview-grid">
+      <div class="overview-stat">
+        <div class="overview-stat-value">~14 min</div>
+        <div class="overview-stat-label">Video Runtime</div>
+        <div class="overview-stat-desc">Built for advisory or homeroom</div>
+      </div>
+      <div class="overview-stat">
+        <div class="overview-stat-value overview-stat-value--gold">NotebookLM</div>
+        <div class="overview-stat-label">Tool Featured</div>
+        <div class="overview-stat-desc">Free with a Google account</div>
+      </div>
+      <div class="overview-stat">
+        <div class="overview-stat-value">0</div>
+        <div class="overview-stat-label">Student Devices Needed</div>
+        <div class="overview-stat-desc">Teacher runs all tech on screen</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>You don't need to be an AI expert.</strong> The video does the teaching. You facilitate the conversation. Follow the guide for your grade band below.
+    </div>
+
+    <div class="callout callout--gold">
+      <strong>Timing is flexible.</strong> This is designed for National AI Literacy Day (March 27), but the conversation doesn't stop on the day. Use it this week, next week, or whenever you have a 20-minute window. No rush.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ELEMENTARY K-4 ═══════ -->
+<section id="k4">
+  <div class="container">
+    <span class="section-number">02</span>
+    <h2>Elementary (K-4)</h2>
+    <p class="section-lead">Play the first two segments, then run the logo activity live. Total time: 10-15 minutes.</p>
+
+    <div class="grade-card">
+      <div class="grade-card-header grade-card-header--k4">
+        <span>How to Use the Video</span>
+        <span class="grade-card-time">~4 min video + 10 min activity</span>
+      </div>
+      <div class="grade-card-body">
+        <h4>Play segments 1-2 only (~4 minutes)</h4>
+        <p>The hook (Davon's "take over the world" story) and the NotebookLM/Marvinville story. Pause after the Marvinville section.</p>
+
+        <h4>Then run the logo activity live:</h4>
+        <ol>
+          <li>Put your school logo on the board/screen.</li>
+          <li>Ask students: "Describe this logo. Tell me everything you see." Collect responses out loud or on paper.</li>
+          <li>Pick two -- one short, one detailed. Read them both aloud. Ask: "Which one gives more information?"</li>
+          <li>If you have ChatGPT access (free version works): paste the short description and show what it generates. Then paste the detailed one. Show the difference.</li>
+          <li>If you don't have ChatGPT access: the video already shows the blob vs. the reimagined logo. Refer back to it: "Remember what happened in the video? The short description made a blob. The detailed one made something amazing."</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="talking-point">
+      <span class="talking-point-label">Talking Point for This Age Group</span>
+      "AI learns patterns, just like you learn patterns. The better you describe something, the better it understands you. That's why details matter -- in your writing AND when you use AI."
+    </div>
+
+    <div class="take-home">
+      <span class="take-home-label">Take-Home Challenge</span>
+      <p>"Ask a parent or guardian to help you try NotebookLM. Pick something you're curious about -- dinosaurs, space, how cars work -- and see what it teaches you."</p>
+    </div>
+
+    <div class="skip-note">
+      <strong>What to skip:</strong> Segments 5-6 (the equity gap and close). The $70K school / job displacement framing is too abstract for this age. The logo activity already teaches the core lesson.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MIDDLE SCHOOL 5-8 ═══════ -->
+<section id="58">
+  <div class="container">
+    <span class="section-number">03</span>
+    <h2>Middle School (5-8)</h2>
+    <p class="section-lead">Play the full video. Then run a 5-10 minute discussion and activity.</p>
+
+    <div class="grade-card">
+      <div class="grade-card-header grade-card-header--58">
+        <span>How to Use the Video</span>
+        <span class="grade-card-time">14 min video + 10 min discussion</span>
+      </div>
+      <div class="grade-card-body">
+        <h4>Play the full video (~14 minutes)</h4>
+        <p>No pauses needed -- the pacing works for this age group.</p>
+
+        <h4>After the video, run the discussion + activity:</h4>
+        <ol>
+          <li><strong>Quick reaction:</strong> "What surprised you?" Let 2-3 students respond. Don't over-facilitate.</li>
+          <li><strong>Logo activity extension:</strong> Have students write their OWN description of the school logo (3 minutes, on paper or device). Collect a few. If you have ChatGPT access, feed them in live and show the results.</li>
+          <li><strong>Discussion prompt:</strong> "What's something you wish you understood better? If you could upload it to NotebookLM and have it explain it to you using something you already love -- anime, sports, music -- what would you pick?"</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="take-home">
+      <span class="take-home-label">Take-Home Challenge</span>
+      <p>"Go to notebooklm.google.com tonight. Upload one thing -- a YouTube video about a topic you're studying, a chapter from your textbook, your class notes. Generate an audio overview. Listen to it. Come back tomorrow and tell me what it taught you."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ HIGH SCHOOL 9-12 ═══════ -->
+<section id="912">
+  <div class="container">
+    <span class="section-number">04</span>
+    <h2>High School (9-12)</h2>
+    <p class="section-lead">Play the full video. Let it land. Then extend the conversation for 10-15 minutes.</p>
+
+    <div class="grade-card">
+      <div class="grade-card-header grade-card-header--912">
+        <span>How to Use the Video</span>
+        <span class="grade-card-time">14 min video + 15 min discussion</span>
+      </div>
+      <div class="grade-card-body">
+        <h4>Play the full video (~14 minutes)</h4>
+        <p>Don't pre-explain or post-summarize -- the video does the work.</p>
+
+        <h4>After the video, extend the conversation:</h4>
+        <ol>
+          <li>
+            <strong>The gap discussion:</strong> "The video mentioned a student at a $70,000-a-year school who has a patent and uses AI to build apps. What are you using AI for? Why is there a difference?"
+            <div class="callout callout--gold" style="margin-top: 0.75rem;">Let students wrestle with this. Don't rescue them with the answer. The discomfort IS the lesson.</div>
+          </li>
+          <li>
+            <strong>Live NotebookLM exploration (if devices available):</strong>
+            <ul style="margin-top: 0.5rem;">
+              <li>Have students open NotebookLM on their phones or laptops.</li>
+              <li>Upload something from a current class -- reading assignment, study guide, textbook chapter, a YouTube lecture link.</li>
+              <li>Generate an audio overview or study guide together.</li>
+              <li>Discuss: "Is this cheating? Or is this studying? Where's the line?"</li>
+            </ul>
+          </li>
+          <li><strong>If no devices available:</strong> Run the discussion only. The video has already planted the seed. Students who are curious will explore NotebookLM on their own.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="take-home">
+      <span class="take-home-label">Take-Home Challenge</span>
+      <p>"Upload your most confusing class material into NotebookLM. Tell it to explain it using something you actually care about. See if it changes how you understand it. If it does -- why aren't you doing this every day?"</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOR TEACHERS ═══════ -->
+<section id="teachers">
+  <div class="container">
+    <span class="section-number">05</span>
+    <h2>For Teachers</h2>
+    <p class="section-lead">This video is for students. But if you're watching it too, here's what to take away.</p>
+
+    <div class="grade-card">
+      <div class="grade-card-header grade-card-header--58">
+        <span>The Message Under the Message</span>
+      </div>
+      <div class="grade-card-body">
+        <h4>The logo activity is a writing lesson in disguise</h4>
+        <p>Students are practicing descriptive writing, revision, and precision -- and they don't even realize it. You can run this activity in any subject, any grade.</p>
+
+        <h4>NotebookLM is not just for students</h4>
+        <p>Upload your curriculum documents, rubrics, or textbook chapters. Generate study guides, audio overviews, or mind maps for your classes in minutes. It's a planning tool, a differentiation tool, and a student support tool.</p>
+
+        <h4>The assignment test</h4>
+        <p>Paste any assignment into ChatGPT. If it completes it in under 2 minutes, that assignment is measuring compliance, not thinking. That's not a criticism -- it's information. Use it to redesign.</p>
+      </div>
+    </div>
+
+    <div class="callout callout--gold">
+      <strong>AI Office Hours</strong> are available Wednesdays 3:30-4:15 PM (in-person at the high school + Zoom) for anyone who wants to explore further. Bring your lesson plan. Bring your questions. Bring your skepticism.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ RESOURCES ═══════ -->
+<section id="resources">
+  <div class="container">
+    <span class="section-number">06</span>
+    <h2>Resources</h2>
+    <p class="section-lead">Everything you need, in one place.</p>
+
+    <ul class="resource-list">
+      <li>
+        <div class="resource-icon resource-icon--gold">&#9654;</div>
+        <div class="resource-info">
+          <strong>AI Literacy in 15 Minutes: "Think Bigger"</strong>
+          <span>14-minute video for advisory periods</span><br>
+          <a href="#">YouTube link TBD</a>
+        </div>
+      </li>
+      <li>
+        <div class="resource-icon resource-icon--blue">&#9881;</div>
+        <div class="resource-info">
+          <strong>Google NotebookLM</strong>
+          <span>Free AI research tool -- podcasts, study guides, videos from any source</span><br>
+          <a href="https://notebooklm.google.com" target="_blank">notebooklm.google.com</a>
+        </div>
+      </li>
+      <li>
+        <div class="resource-icon resource-icon--blue">&#127758;</div>
+        <div class="resource-info">
+          <strong>National AI Literacy Day</strong>
+          <span>Official site -- events, resources, and how schools across the country are participating</span><br>
+          <a href="https://ailiteracyday.org" target="_blank">ailiteracyday.org</a>
+        </div>
+      </li>
+      <li>
+        <div class="resource-icon resource-icon--gold">&#128218;</div>
+        <div class="resource-info">
+          <strong>Teacher in a Suit</strong>
+          <span>More AI in education resources, workshops, and consulting</span><br>
+          <a href="https://teacherinsuit.com" target="_blank">teacherinsuit.com</a>
+        </div>
+      </li>
+      <li>
+        <div class="resource-icon resource-icon--blue">&#128172;</div>
+        <div class="resource-info">
+          <strong>AI Office Hours</strong>
+          <span>Wednesdays 3:30-4:15 PM -- in person + Zoom</span><br>
+          <a href="https://us06web.zoom.us/j/88955703459?pwd=zTP9Dn5yJCMhqzt3Tl5Q4vRBaYxpNE.1" target="_blank">Join on Zoom</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<div class="footer">
+  <div class="footer-logos">
+    <img src="logos/tias-blue.png" alt="Teacher in a Suit" class="tias-footer">
+    <div class="footer-divider"></div>
+    <img src="https://images.squarespace-cdn.com/content/v1/66bdf98b52ccc74745188be4/abe54924-3984-4802-8daa-db16d8bd287c/Foundation_Academies_Primary_Horizontal-White.png" alt="Foundation Academies" class="fa-footer" style="filter: brightness(0) saturate(100%) invert(17%) sepia(40%) saturate(1200%) hue-rotate(190deg) brightness(95%) contrast(95%);">
+  </div>
+  <p><strong>Teacher in a Suit</strong> &mdash; AI Literacy Teacher Guide<br>
+  Created for Foundation Academies &middot; National AI Literacy Day 2026<br>
+  Questions? Reach out to Winston Roberts &mdash; AI Office Hours, Wednesdays 3:30-4:15</p>
+</div>
+
+</body>
+</html>
